@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- Create an element where the map will take place -->
+<body>
+    <div class="center">
+        <h1>Outward migration from Vietnam (2000-2020)</h1>
+        <span>Select a year: </span>
+        <span id="yearLabel">2000</span>
+
+        <div id="yearScroller">
+            <input type="range" min="2000" max="2020" step="1" value="2000" id="yearSlider">
+        </div>
+        <button id="totalButton">Show total</button>
+        <br>
+        <script src="map.js"></script>
+        <br>
+    </div>
+    
+    <svg id="my_dataviz" width="1400" height="550">
+    </svg>
+    <div class="center" id="legend"></div>
+</body>
