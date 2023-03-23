@@ -1,5 +1,4 @@
 function init() {
-    let firstInit = true;
     let totalShowed = false
 
     const yearRange = [1, 100, 500, 1000, 2000, 10000, 50000];
@@ -66,30 +65,9 @@ function init() {
             .translate([width / 2, height / 2]);
 
         // Data and color scale
-        let data = new Map()
-
-        // const tooltip = d3.select("#my_dataviz")
-        //     .append("div")
-        //     .style("opacity", 0)
-        //     .attr("class", "tooltip")
-        //     .style("background-color", "white")
-        //     .style("border", "solid")
-        //     .style("border-width", "2px")
-        //     .style("border-radius", "5px")
-        //     .style("padding", "5px")
-
-        const mouseover = function(event, d) {
-            const country = d3.select(this).datum();
-            tooltip.style("opacity", 1)
-                    .html(`${country.properties.name}: ${country.total || 0}`)
-                    .style("left", (event.x + 10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-                    .style("top", (event.y - 28) + "px")
-            d3.select(this)
-                .style("stroke", "#333")
-                .style("stroke-width", 1.5)
-        }
+        let data = new Map();
         
-            // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+        // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
         const mouseleave = function(event,d) {
             d3.select(this)
                 .style("stroke", "none")
