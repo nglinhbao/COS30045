@@ -89,17 +89,6 @@ function init() {
                 .style("stroke-width", 1.5)
         }
         
-        // const mousemove = function(event, d) {
-        //     const country = d3.select(this).datum();
-        //     console.log(event.x)
-        //     // tooltip
-        //     //     .html(`${country.properties.name}: ${country.total || 0}`)
-        //     //     .style("left", (event.x + 10) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-        //     //     .style("top", (event.y - 28) + "px")
-        //     tooltip.style("opacity", 1)
-        //             .html(`${country.properties.name}: ${country.total || 0}`)
-        // }
-        
             // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
         const mouseleave = function(event,d) {
             d3.select(this)
@@ -143,7 +132,7 @@ function init() {
                         .style("stroke", "#333")
                         .style("stroke-width", 1)
                     tooltip.style("opacity", 1)
-                        .html(`${country.properties.name}: ${country.total || 0}`)
+                        .html(`${country.properties.name}: ${country.total === 0 ? 'N/A' : country.total}`)
                 })
                 .on("mouseleave", mouseleave)
 
