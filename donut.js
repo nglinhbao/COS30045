@@ -18,7 +18,7 @@ function init() {
         })
         .then(function() {
             // Code to execute after the CSV file has finished loading
-            drawDonut(region, subRegion, subRegionExplain, name)
+            drawDonut(region, subRegion, subRegionExplain, name, input)
         })
         .catch(function(error) {
             // Code to execute if an error occurs while loading the CSV file
@@ -26,7 +26,7 @@ function init() {
         });
     }
 
-    const drawDonut = (data, data2, data2explain, nameDomain) => {
+    const drawDonut = (data, data2, data2explain, nameDomain, input) => {
         // set the dimensions and margins of the graph
         const width = 800,
         height = 800,
@@ -104,7 +104,7 @@ function init() {
                     .attr("stroke", "white")
                     .style("stroke-width", "2px")
                     .style("opacity", d => {
-                        if (subRegionExplain[d.data[0]] === selectArea) {
+                        if (data2explain[d.data[0]] === selectArea) {
                             return 0.7;
                         } else {
                             return 0;
@@ -116,12 +116,12 @@ function init() {
                     .join('text')
                     .attr("class", "extended-label")
                     .text(d => {
-                        if (subRegionExplain[d.data[0]] === selectArea) {
+                        if (data2explain[d.data[0]] === selectArea) {
                             return d.data[1]
                         }
                     })
                     .attr('transform', function(d) {
-                        if (subRegionExplain[d.data[0]] === selectArea) {
+                        if (data2explain[d.data[0]] === selectArea) {
                             const pos = arc2.centroid(d);
                             return `translate(${pos})`;
                         }
@@ -139,7 +139,7 @@ function init() {
                     .style("fill", "none")
                     .style("stroke-width", "2px")
                     .attr('points', function(d) {
-                        if (subRegionExplain[d.data[0]] === selectArea) {
+                        if (data2explain[d.data[0]] === selectArea) {
                             var posA = arc2.centroid(d) // line insertion in the slice
                             var posB = outerArc2.centroid(d) // line break: we use the other arc generator that has been built only for that
                             var posC = outerArc2.centroid(d); // Label position = almost the same as posB
@@ -165,12 +165,12 @@ function init() {
                     .append('text')
                     .attr("class", "extendLabels")
                     .text((d) => {
-                        if (subRegionExplain[d.data[0]] === selectArea) {
+                        if (data2explain[d.data[0]] === selectArea) {
                             return d.data[0]
                         }
                     })
                     .attr('transform', function(d) {
-                        if (subRegionExplain[d.data[0]] === selectArea) {
+                        if (data2explain[d.data[0]] === selectArea) {
                             var pos = outerArc2.centroid(d);
                             var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
                             pos[0] = radius * 0.89 * (midangle < Math.PI ? 1 : -1);
@@ -178,7 +178,7 @@ function init() {
                         }
                     })
                     .style('text-anchor', function(d) {
-                        if (subRegionExplain[d.data[0]] === selectArea) {
+                        if (data2explain[d.data[0]] === selectArea) {
                             var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
                             return (midangle < Math.PI ? 'start' : 'end')
                         }
@@ -186,7 +186,7 @@ function init() {
         })
         .on("mouseout", function(event, d) {
             svg.select('.middle-text')
-            .text("Vietnam");
+            .text(input);
 
             d3.select(this)
             .transition()
@@ -214,9 +214,11 @@ function init() {
         svg
             .append("text")
             .attr("class", "middle-text")
-            .text("Vietnam")
+            .text(input)
             .style('text-anchor', 'middle');
     }
+
+    takeInput('Immigrants')
 
     const Ibutton = document.getElementById('Ibutton')
     Ibutton.addEventListener('click', () => {
