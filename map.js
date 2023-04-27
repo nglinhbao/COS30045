@@ -82,7 +82,6 @@ function init() {
         })
         ]).then(function(loadData){
             const topo = loadData[0]
-
             // Draw the map
             const mapGroup = svg.append("g")
             mapGroup.selectAll("path")
