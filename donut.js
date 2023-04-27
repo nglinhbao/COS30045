@@ -5,7 +5,7 @@ function init() {
     let name = []
 
     const takeInput = (input) => {
-        d3.csv("/data/dataVietnam.csv", function(d) {
+        d3.csv("./data/dataVietnam.csv", function(d) {
             if (d["Sub-region"] != "Total") {
                 subRegion[d["Sub-region"]] = parseInt(d[input])
                 subRegionExplain[d["Sub-region"]] = d["Region"]
