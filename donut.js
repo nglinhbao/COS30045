@@ -126,7 +126,7 @@ function init() {
                             return `translate(${pos})`;
                         }
                     })
-                .style('text-anchor', 'middle')
+                    .style('text-anchor', 'middle')
 
                 // Add the polylines between chart and labels:
                 svg
