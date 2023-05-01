@@ -103,22 +103,30 @@ function init() {
                     }
                 })
                 // add hover effect
-                .on("mouseover", function(d) {
+                .on("mouseover", function(event, d) {
                     const country = d3.select(this).datum();
                     d3.select(this)
                         .style("stroke", "#333")
                         .style("stroke-width", 1)
                     tooltip.style("opacity", 1)
                         .html(`${country.properties.name}: ${country.total === 0 ? 'N/A' : country.total}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 30) + "px");
+                       
                 })
                 .on("mouseleave", mouseleave)
 
                 const tooltip = d3.select(".center")
                                 .append("div")
                                 .attr("id", "tooltip")
-                                .style("opacity", 0);
+                                .style("opacity", 0)
+                                .style("stroke", "none");
+                            
+                                
         }
     )}
+
+    
 
     drawMap(2000)
     drawLengend(yearRange)
