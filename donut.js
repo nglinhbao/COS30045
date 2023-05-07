@@ -4,6 +4,7 @@ function init() {
     let subRegionExplain = {}
     let name = []
 
+    //input process
     const takeInput = (input) => {
         d3.csv("./data/dataVietnam.csv", function(d) {
             if (d["Sub-region"] != "Total") {
@@ -26,6 +27,7 @@ function init() {
         });
     }
 
+    //draw donut
     const drawDonut = (data, data2, data2explain, nameDomain, input) => {
         // set the dimensions and margins of the graph
         const width = 800,
@@ -74,7 +76,8 @@ function init() {
 
         // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
         let selectArea = "";
-
+        
+        //draw inner slices
         svg
             .selectAll('allSlices')
             .data(data_ready)
@@ -85,14 +88,17 @@ function init() {
             .style("stroke-width", "2px")
             .style("opacity", 0.7)
             .on("mouseover", function(event, d) {
+                //change middle text
                 svg.select('.middle-text')
                     .text(d.data[0]);
                 selectArea = d.data[0];
+                //add border
                 d3.select(this)
                     .transition()
                     .delay(50)
                     .attr("stroke", "black")
                     .attr("stroke-width", "5px");
+                //add extended slices when hovering
                 svg.selectAll(".extended-slice")
                     .data(data_ready2)
                     .join("path")
@@ -110,6 +116,7 @@ function init() {
                             return 0;
                         }
                     })
+                //add label for extended slices
                 svg
                     .selectAll('allLabels')
                     .data(data_ready2)
@@ -185,18 +192,20 @@ function init() {
                     })
         })
         .on("mouseout", function(event, d) {
+            //return to default middle text
             svg.select('.middle-text')
             .text(input);
 
+            //remove stroke and extended slices
             d3.select(this)
-            .transition()
-            .delay(50)
-            .attr('stroke', "white")
-            .style("stroke-width", "2px")
-            svg.selectAll(".extended-slice").remove()
-            svg.selectAll(".extended-label").remove()
-            svg.selectAll(".extendPolylines").remove()
-            svg.selectAll(".extendLabels").remove()
+                .transition()
+                .delay(50)
+                .attr('stroke', "white")
+                .style("stroke-width", "2px")
+                svg.selectAll(".extended-slice").remove()
+                svg.selectAll(".extended-label").remove()
+                svg.selectAll(".extendPolylines").remove()
+                svg.selectAll(".extendLabels").remove()
         })
 
         // Add the polylines between chart and labels:
@@ -220,6 +229,7 @@ function init() {
 
     takeInput('Immigrants')
 
+    //immigrants
     const Ibutton = document.getElementById('Ibutton')
     Ibutton.addEventListener('click', () => {
         let svgTag = document.querySelector('svg');
@@ -229,6 +239,7 @@ function init() {
         takeInput('Immigrants')
     })
 
+    //emigrants
     const Ebutton = document.getElementById('Ebutton')
     Ebutton.addEventListener('click', () => {
         let svgTag = document.querySelector('svg');

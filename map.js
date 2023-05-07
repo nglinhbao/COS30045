@@ -10,6 +10,7 @@ function init() {
             .domain(totalRange)
             .range(d3.schemeGreens[9]);
 
+    //draw legends
     const drawLengend = (dataset) => {
         const svg2 = d3.select("#legend")
                 .append("svg")
@@ -51,6 +52,7 @@ function init() {
             .attr("fill", 'black');
     }
 
+    //draw map
     const drawMap = (year) => {
         // The svg
         const svg = d3.select("svg"),
@@ -105,9 +107,11 @@ function init() {
                 // add hover effect
                 .on("mouseover", function(event, d) {
                     const country = d3.select(this).datum();
+                    //add border
                     d3.select(this)
                         .style("stroke", "#333")
                         .style("stroke-width", 1)
+                    //add tooltip
                     tooltip.style("opacity", 1)
                         .html(`${country.properties.name}: ${country.total === 0 ? 'N/A' : country.total}`)
                         .style("left", (event.pageX + 10) + "px")
@@ -125,8 +129,6 @@ function init() {
         }
     )}
 
-    
-
     drawMap(2000)
     drawLengend(yearRange)
     totalShowed = true;
@@ -135,7 +137,8 @@ function init() {
 
     const yearSlider = document.getElementById('yearSlider')
     const yearLabel = document.getElementById('yearLabel')
-
+    
+    //slider
     yearSlider.addEventListener('input', () => {
         totalShowed = false;
         const selectedYear = parseInt(yearSlider.value);
@@ -145,6 +148,7 @@ function init() {
         drawMap(selectedYear)
     })
 
+    //show total
     const totalButton = document.getElementById('totalButton')
     totalButton.addEventListener('click', () => {
         yearLabel.textContent = 'Total';
