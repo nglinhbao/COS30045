@@ -199,7 +199,7 @@ function init() {
             svg.selectAll(".extendLabels").remove()
         })
 
-        // // Add the polylines between chart and labels:
+        // Add the polylines between chart and labels:
         svg
             .selectAll('allLabels')
             .data(data_ready)

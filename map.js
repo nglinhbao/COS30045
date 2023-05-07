@@ -111,8 +111,7 @@ function init() {
                     tooltip.style("opacity", 1)
                         .html(`${country.properties.name}: ${country.total === 0 ? 'N/A' : country.total}`)
                         .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 30) + "px");
-                       
+                        .style("top", (event.pageY - 30) + "px");                
                 })
                 .on("mouseleave", mouseleave)
 
