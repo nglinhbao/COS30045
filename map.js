@@ -113,9 +113,31 @@ function init() {
                         .style("stroke-width", 1)
                     //add tooltip
                     tooltip.style("opacity", 1)
-                        .html(`<h3>${country.properties.name}:</h3>${country.total === 0 ? 'N/A' : country.total}`)
+                        .html(`<h3>${country.properties.name}:</h3>${country.total === 0 ? 'N/A' : country.total}` + "<h3>Line Chart Goes Here</h3>")
                         .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 30) + "px");                
+                        .style("top", (event.pageY - 30) + "px"); 
+                    //add line chart inside
+                        var lineData = [{x: 0, y: 0}, {x: 1, y: 1}, {x: 2, y: 2}, {x: 3, y: 3}];
+                        var xScale = d3.scaleLinear()
+                          .domain(d3.extent(lineData, function(d) { return d.x; }))
+                          .range([0, 100]);
+                        var yScale = d3.scaleLinear()
+                          .domain(d3.extent(lineData, function(d) { return d.y; }))
+                          .range([100, 0]);
+                        var line = d3.line()
+                          .x(function(d) { return xScale(d.x); })
+                          .y(function(d) { return yScale(d.y); });
+                        tooltip.append("svg")
+                          .attr("width", 100)
+                          .attr("height", 100)
+                          .append("path")
+                            .datum(lineData)
+                            .attr("class", "line")
+                            .attr("d", line)
+                            .attr("fill", "none")
+                            .attr("stroke", "white");
+                       
+
                 })
                 .on("mouseleave", mouseleave)
                 .on("mouseout", function(d) {       
