@@ -1,15 +1,32 @@
 .center {
     text-align: center;
 }
+#tooltip h3 {
+    margin:2px;
+    font-size:14px;
+}
 
 #tooltip {
-    position: absolute;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    pointer-events: none;
-    opacity: 0;
-    font-size: 14px;
-    font-weight: bold;
+        position: absolute;           
+        background:rgba(0,0,0,0.8);
+        text-align: left;
+        border:5px;
+        border-radius:5px;
+        font: 12px sans-serif;        
+        width:auto;
+        padding:6px;
+        color:white;
+        opacity:0;
+        pointer-events: none;
+}
+
+.year.label {
+    font: 300 2.5em "Inter";
+    fill: gray;
   }
+  
+  .helper.label {
+    font: 150 1em "Inter";
+    fill: gray;
+  }
+

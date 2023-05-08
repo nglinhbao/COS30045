@@ -109,12 +109,16 @@ function init() {
                         .style("stroke", "#333")
                         .style("stroke-width", 1)
                     tooltip.style("opacity", 1)
-                        .html(`${country.properties.name}: ${country.total === 0 ? 'N/A' : country.total}`)
+                        .html(`<h3>${country.properties.name}:</h3>${country.total === 0 ? 'N/A' : country.total}`)
                         .style("left", (event.pageX + 10) + "px")
                         .style("top", (event.pageY - 30) + "px");
                        
                 })
                 .on("mouseleave", mouseleave)
+                .on("mouseout", function(d) {       
+                    d3.select("#tooltip")       
+                       .style("opacity", 0);   
+                });
 
                 const tooltip = d3.select(".center")
                                 .append("div")
@@ -158,4 +162,7 @@ function init() {
     })
 }
 
-window.onload = init;
+window.onload = init; 
+
+//https://gist.github.com/jgujgu/bfbb41f5e8b90ff09d7805f71ef2538e
+//https://github.com/connorrothschild/D3.js/tree/master/map-overdoses
