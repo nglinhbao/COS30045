@@ -13,8 +13,11 @@
 <body>
     <div class="center">
         <h1>Outward migration from Vietnam (2000-2020)</h1>
-        <a href="./donut.html">Donut chart</a>
+        <!-- <a href="./donut.html">Donut chart</a> -->
+        <a href="./donut.html"  style=" --clr:#1e9bff"><span1>Donut chart</span1></a>
         <br>
+        <br>
+        
         <span>Select a year: </span>
         <span id="yearLabel">2000</span>
 
@@ -22,13 +25,14 @@
             <input type="range" min="2000" max="2020" step="1" value="2000" id="yearSlider">
         </div>
         <button id="totalButton">Show total</button>
-        <br>
-        <script src="map.js"></script>
-        <br>
+        
         
     </div>
     
     <svg id="my_dataviz" width="1400" height="550">
     </svg>
     <div class="center" id="legend"></div>
+    
+    <script src="map.js"></script>
+   
 </body>
