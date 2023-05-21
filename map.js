@@ -52,6 +52,20 @@ function init() {
             .attr("fill", 'black');
     }
 
+    let allData = new Map();
+    let promises = [];
+
+    for (let year = 2000; year <= 2020; year++) {
+        let promise = d3.csv("./data/emigration.csv").then(function (data) {
+            let yearData = new Map();
+            data.forEach(function (d) {
+            yearData.set(d.code, +d[year.toString()]);
+            });
+            allData.set(year, yearData);
+        });
+        promises.push(promise);
+    }
+    
     //draw map
     const drawMap = (year) => {
         // The svg
@@ -106,6 +120,7 @@ function init() {
                 })
                 // add hover effect
                 .on("mouseover", function(event, d) {
+    
                     const country = d3.select(this).datum();
                     //add border
                     d3.select(this)
@@ -116,28 +131,43 @@ function init() {
                         .html(`<h3>${country.properties.name}:</h3>${country.total === 0 ? 'N/A' : country.total}` + "<h3>Line Chart Goes Here</h3>")
                         .style("left", (event.pageX + 10) + "px")
                         .style("top", (event.pageY - 30) + "px"); 
-                    //add line chart inside
-                        var lineData = [{x: 0, y: 0}, {x: 1, y: 1}, {x: 2, y: 2}, {x: 3, y: 3}];
-                        var xScale = d3.scaleLinear()
+
+                    var lineData = [];
+
+                    allData.forEach(function (yearData, year) {
+                        if (yearData.has(d.id)) {
+                            var value = yearData.get(d.id);
+                            lineData.push({ x: year, y: value });
+                        }
+                    });
+
+                    var xScale = d3.scaleLinear()
                           .domain(d3.extent(lineData, function(d) { return d.x; }))
                           .range([0, 100]);
-                        var yScale = d3.scaleLinear()
-                          .domain(d3.extent(lineData, function(d) { return d.y; }))
-                          .range([100, 0]);
-                        var line = d3.line()
-                          .x(function(d) { return xScale(d.x); })
-                          .y(function(d) { return yScale(d.y); });
-                        tooltip.append("svg")
-                          .attr("width", 100)
-                          .attr("height", 100)
-                          .append("path")
-                            .datum(lineData)
-                            .attr("class", "line")
-                            .attr("d", line)
-                            .attr("fill", "none")
-                            .attr("stroke", "white");
-                       
+                    var yScale = d3.scaleLinear()
+                        .domain(d3.extent(lineData, function(d) { return d.y; }))
+                        .range([100, 0]);
 
+                    // Define the line functions
+                    const valueline1 = d3.line()
+                        .x(d => x(d.Date))
+                        .y(d => y(d['High income']));
+
+                    var line = d3.line()
+                        .x(function(d) { return xScale(d.x); })
+                        .y(function(d) { return yScale(d.y); });
+
+                    tooltip.append("svg")
+                        .attr("width", 100)
+                        .attr("height", 100)
+                        .append("path")
+                        .datum(lineData)
+                        .attr("class", "line")
+                        .attr("d", line)
+                        .attr("fill", "none")
+                        .attr("stroke", "white");
+                       
+                    console.log(allData)
                 })
                 .on("mouseleave", mouseleave)
                 .on("mouseout", function(d) {       
@@ -158,7 +188,6 @@ function init() {
     drawMap(2000)
     drawLengend(yearRange)
     totalShowed = true;
-    drawLengend(totalRange)
     totalShowed = false;
 
     const yearSlider = document.getElementById('yearSlider')
@@ -171,6 +200,9 @@ function init() {
         yearLabel.textContent = selectedYear;
         let element = document.getElementById("tooltip");
         element.remove();
+        let legendElement = document.getElementById('legend');
+        legendElement.innerHTML = '';
+        drawLengend(yearRange)
         drawMap(selectedYear)
     })
 
@@ -181,8 +213,10 @@ function init() {
 
         let element = document.getElementById("tooltip");
         element.remove();
-        
+        let legendElement = document.getElementById('legend');
+        legendElement.innerHTML = '';
         totalShowed = true
+        drawLengend(totalRange)
         drawMap('Total')
     })
 }
