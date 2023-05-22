@@ -12,26 +12,31 @@
   background-image: url(https://scienceline.org/wp-content/uploads/2020/09/Out_of_Ethiopia_shadow_WALK_clouds_text.gif);
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
   color: #fff;
   
 }
 
-.content
-{
+
+.content {
   color: #fff;
   position: absolute;
   top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
   z-index: 2;
-  font-size: 50px;
-  margin: 10px 0 30px;
-  line-height: 80px;
+  font-size: 4vw;
+  line-height: 6vw;
+  white-space: nowrap; 
 }
+
 
 .note
 {
   color: red;
+  text-align: justify;
+  padding: 25px;
 }
 .text
 {
@@ -46,6 +51,11 @@ body, footer
   align-items: center;
   text-align: center;
   overflow-x: hidden;
+}
+
+footer
+{
+padding: 2%;
 }
 
 span
@@ -122,6 +132,6 @@ a span1, button span1
     fill: gray;
   }
 
-
-
+  
+  
   /* https://scienceline.org/2020/09/invasive-humans/ */

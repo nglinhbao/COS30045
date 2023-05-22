@@ -223,5 +223,3 @@ function init() {
 
 window.onload = init; 
 
-//https://gist.github.com/jgujgu/bfbb41f5e8b90ff09d7805f71ef2538e
-//https://github.com/connorrothschild/D3.js/tree/master/map-overdoses

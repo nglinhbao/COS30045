@@ -48,7 +48,7 @@ function init() {
         // set the color scale
         const color = d3.scaleOrdinal()
                         .domain(nameDomain)
-                        .range(d3.schemeSet3);
+                        .range(d3.schemeAccent);
 
         // Compute the position of each group on the pie:
         const pie = d3.pie()
