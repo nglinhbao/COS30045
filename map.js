@@ -128,7 +128,7 @@ function init() {
                         .style("stroke-width", 1)
                     //add tooltip
                     tooltip.style("opacity", 1)
-                        .html(`<h3>${country.properties.name}:</h3>${country.total === 0 ? 'N/A' : country.total}` + "<h3>Line Chart Goes Here</h3>")
+                        .html(`<h3>${country.properties.name}:</h3>${country.total === 0 ? 'N/A' : country.total.toLocaleString("en-US")}` + "<h3>Line Chart Goes Here</h3>")
                         .style("left", (event.pageX + 10) + "px")
                         .style("top", (event.pageY - 30) + "px"); 
 
@@ -148,18 +148,13 @@ function init() {
                         .domain(d3.extent(lineData, function(d) { return d.y; }))
                         .range([100, 0]);
 
-                    // Define the line functions
-                    const valueline1 = d3.line()
-                        .x(d => x(d.Date))
-                        .y(d => y(d['High income']));
-
                     var line = d3.line()
                         .x(function(d) { return xScale(d.x); })
                         .y(function(d) { return yScale(d.y); });
 
                     tooltip.append("svg")
-                        .attr("width", 100)
-                        .attr("height", 100)
+                        .attr("width", 150)
+                        .attr("height", 150)
                         .append("path")
                         .datum(lineData)
                         .attr("class", "line")
