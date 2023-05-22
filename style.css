@@ -31,6 +31,24 @@
   white-space: nowrap; 
 }
 
+.blockquote
+{
+  max-width: 100vw  ;
+  margin: 1px 20px;
+  padding: 10px;
+  background: #f8fffe;
+  border: 1px solid #b0d2b0;
+  color: #0b4237;
+  box-sizing: border-box;
+  font-style: italic;
+  font-family: "Gelasio", serif;
+  font-size: 1.15em;
+}
+
+.blockquote-bordered
+{
+  border-left-width: 10px;
+}
 
 .note
 {
@@ -132,6 +150,5 @@ a span1, button span1
     fill: gray;
   }
 
-  
-  
+ 
   /* https://scienceline.org/2020/09/invasive-humans/ */
