@@ -59,7 +59,7 @@ function init() {
         let promise = d3.csv("./data/emigration.csv").then(function (data) {
             let yearData = new Map();
             data.forEach(function (d) {
-            yearData.set(d.code, +d[year.toString()]);
+                yearData.set(d.code, +d[year.toString()]);
             });
             allData.set(year, yearData);
         });
@@ -144,42 +144,72 @@ function init() {
                     });
 
                     var xScale = d3.scaleLinear()
-                          .domain(d3.extent(lineData, function(d) { return d.x; }))
-                          .range([0, 100]);
+                        .domain(d3.extent(lineData, function(d) { return d.x; }))
+                        .range([0, 140]);
+
                     var yScale = d3.scaleLinear()
                         .domain(d3.extent(lineData, function(d) { return d.y; }))
-                        .range([100, 0]);
+                        .range([140, 0]);
 
                     var line = d3.line()
-                        .x(function(d) { return xScale(d.x); })
+                        .x(function(d) { return xScale(d.x) })
                         .y(function(d) { return yScale(d.y); });
 
-                    tooltip.append("svg")
-                        .attr("width", 150)
-                        .attr("height", 150)
-                        .append("path")
+                    var xAxis = d3.axisBottom(xScale).ticks(4); // Specify the number of x-axis ticks
+                    var yAxis = d3.axisRight(yScale).ticks(5); // Specify the number of y-axis ticks
+                    
+                    var svg = tooltip.append("svg")
+                        .attr("width", 220)
+                        .attr("height", 220);
+
+                    // Append a group element for the x-axis
+                    var xAxisGroup = svg.append("g")
+                        .attr("transform", "translate(35, 170)") // Adjust the positioning of the x-axis
+                        .call(xAxis);
+
+                    // Append text label for x-axis
+                    xAxisGroup.append("text")
+                        .attr("dx", "-10")
+                        .attr("dy", "0")
+                        .style("text-anchor", "end")
+                        .attr("fill", "white")
+                        .text("Year");
+
+                    // Append a group element for the y-axis
+                    var yAxisGroup = svg.append("g")
+                        .attr("transform", "translate(175, 30)") // Adjust the positioning of the y-axis
+                        .call(yAxis);
+
+                    // Append text label for y-axis
+                    yAxisGroup.append("text")
+                        .attr("dx", "+30")
+                        .attr("dy", "-20")
+                        .style("text-anchor", "end")
+                        .attr("fill", "white")
+                        .text("People");
+
+                    // Append the line to the SVG
+                    svg.append("path")
                         .datum(lineData)
                         .attr("class", "line")
                         .attr("d", line)
                         .attr("fill", "none")
-                        .attr("stroke", "white");
-                       
-                    console.log(allData)
+                        .attr("stroke", "white")
+                        .attr("transform", "translate(35, 20)");
+
                 })
+
                 .on("mouseleave", mouseleave)
                 .on("mouseout", function(d) {       
                     d3.select("#tooltip")       
                        .style("opacity", 0);   
-                });
+          1      });
 
                 const tooltip = d3.select(".center")
                                 .append("div")
                                 .attr("id", "tooltip")
                                 .style("opacity", 0)
-                                .style("stroke", "none");
-
-
-                                
+                                .style("stroke", "none");   
         }
     )}
 
