@@ -172,5 +172,44 @@ a span1, button span1
     animation-iteration-count: 1;
   }
   
+  section
+  {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  section::before
+  {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 	#FFE569, #F79327);
+    border-radius: 0 0 50% 50%/0 0 100% 100%;
+    transform: scaleX(1.5);
+  }
+  section .curve
+  {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    max-width: 900px;
+    text-align: center;
+  }
+  section .curve h1
+  {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-size: 3em;
+  }
+
  
   /* https://scienceline.org/2020/09/invasive-humans/ */
