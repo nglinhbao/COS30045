@@ -246,6 +246,9 @@ function init() {
         totalShowed = true
         drawLengend(totalRange)
         drawMap('Total')
+        //move slider to the end
+        yearSlider.value = yearSlider.max;
+        yearLabel.textContent = yearSlider.max;
     })
 }
 
