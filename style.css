@@ -150,5 +150,27 @@ a span1, button span1
     fill: gray;
   }
 
+  @keyframes corkscrew {
+    0% {
+      transform: scale(0) rotateZ(90deg);
+    }
+    50% {
+      transform: scale(1.2) rotateZ(180deg);
+    }
+    80% {
+      transform: scale(1.1) rotateZ(270deg);
+    }
+    100% {
+      transform: scale(1) rotateZ(360deg);
+    }
+  }
+  
+  .corkscrew-animation {
+    animation-name: corkscrew;
+    animation-duration: 3s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+  }
+  
  
   /* https://scienceline.org/2020/09/invasive-humans/ */

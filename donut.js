@@ -32,7 +32,7 @@ function init() {
         // set the dimensions and margins of the graph
         const width = 800,
         height = 800,
-        margin = 40;
+        margin = 0;
 
         // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
         const radius = Math.min(width, height) / 2.5 - margin
@@ -248,6 +248,8 @@ function init() {
         }
         takeInput('Emigrants')
     })
+
+    
 }
 
 window.onload = init;

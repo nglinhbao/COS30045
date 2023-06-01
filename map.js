@@ -118,6 +118,8 @@ function init() {
                         return totalColorRange(d.total)
                     }
                 })
+            
+  
                 // add hover effect
                 .on("mouseover", function(event, d) {
     
@@ -175,7 +177,8 @@ function init() {
                                 .attr("id", "tooltip")
                                 .style("opacity", 0)
                                 .style("stroke", "none");
-                            
+
+
                                 
         }
     )}
