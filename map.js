@@ -1,8 +1,9 @@
 function init() {
     let totalShowed = false
 
-    const yearRange = [1, 100, 500, 1000, 2000, 10000, 50000];
-    const totalRange = [1, 10000, 20000, 50000, 100000, 300000, 500000, 1000000]
+    let yearRange = [1, 100, 500, 1000, 2000, 10000, 50000];
+    let totalRange = [1, 10000, 20000, 50000, 100000, 300000, 500000, 1000000];
+
     const colorScale = d3.scaleThreshold()
             .domain(yearRange)
             .range(d3.schemeBlues[8]);
@@ -42,7 +43,7 @@ function init() {
             .data(dataset)
             .enter()
             .append("text")
-            .text((d) => d)
+            .text((d) => d.toLocaleString('en-US'))
             .attr("x", (d,i) => {
                 return i*60
             })
