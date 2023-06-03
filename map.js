@@ -143,6 +143,8 @@ function init() {
                         }
                     });
 
+                    console.log(allData)
+
                     var xScale = d3.scaleLinear()
                         .domain(d3.extent(lineData, function(d) { return d.x; }))
                         .range([0, 140]);

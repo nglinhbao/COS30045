@@ -30,8 +30,8 @@ function init() {
     //draw donut
     const drawDonut = (data, data2, data2explain, nameDomain, input) => {
         // set the dimensions and margins of the graph
-        const width = 800,
-        height = 800,
+        const width = 910,
+        height = 700,
         margin = 0;
 
         // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
