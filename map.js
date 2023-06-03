@@ -142,7 +142,6 @@ function init() {
                             lineData.push({ x: year, y: value });
                         }
                     });
-                    console.log(allData)
 
                     var xScale = d3.scaleLinear()
                         .domain(d3.extent(lineData, function(d) { return d.x; }))
