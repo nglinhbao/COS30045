@@ -53,7 +53,6 @@ function init() {
     }
 
     let allData = new Map();
-    let promises = [];
 
     for (let year = 2000; year <= 2020; year++) {
         let promise = d3.csv("./data/emigration.csv").then(function (data) {
@@ -63,9 +62,8 @@ function init() {
             });
             allData.set(year, yearData);
         });
-        promises.push(promise);
     }
-    
+
     //draw map
     const drawMap = (year) => {
         // The svg
@@ -136,13 +134,14 @@ function init() {
 
                     var lineData = [];
 
+                    allData = new Map([...allData.entries()].sort((a, b) => a[0] - b[0]));
+
                     allData.forEach(function (yearData, year) {
                         if (yearData.has(d.id)) {
                             var value = yearData.get(d.id);
                             lineData.push({ x: year, y: value });
                         }
                     });
-
                     console.log(allData)
 
                     var xScale = d3.scaleLinear()
@@ -229,7 +228,7 @@ function init() {
     yearSlider.addEventListener('input', () => {
         totalShowed = false;
         const selectedYear = parseInt(yearSlider.value);
-        yearLabel.textContent = selectedYear;
+        yearLabel.textContent = 'Select a year: ' + selectedYear;
         let element = document.getElementById("tooltip");
         element.remove();
         let legendElement = document.getElementById('legend');
@@ -241,7 +240,7 @@ function init() {
     //show total
     const totalButton = document.getElementById('totalButton')
     totalButton.addEventListener('click', () => {
-        yearLabel.textContent = 'Total';
+        yearLabel.textContent = 'Current total population';
 
         let element = document.getElementById("tooltip");
         element.remove();
@@ -252,7 +251,6 @@ function init() {
         drawMap('Total')
         //move slider to the end
         yearSlider.value = yearSlider.max;
-        yearLabel.textContent = yearSlider.max;
     })
 }
 
