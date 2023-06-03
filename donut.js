@@ -124,7 +124,7 @@ function init() {
                     .attr("class", "extended-label")
                     .text(d => {
                         if (data2explain[d.data[0]] === selectArea) {
-                            return d.data[1]
+                            return d.data[1].toLocaleString("en-US")
                         }
                     })
                     .attr('transform', function(d) {
@@ -213,7 +213,7 @@ function init() {
             .selectAll('allLabels')
             .data(data_ready)
             .join('text')
-            .text(d => d.data[1])
+            .text(d => d.data[1].toLocaleString("en-US"))
             .attr('transform', function(d) {
             const pos = arc.centroid(d);
                 return `translate(${pos})`;

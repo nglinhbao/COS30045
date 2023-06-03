@@ -157,7 +157,9 @@ function init() {
                         .x(function(d) { return xScale(d.x) })
                         .y(function(d) { return yScale(d.y); });
 
-                    var xAxis = d3.axisBottom(xScale).ticks(4); // Specify the number of x-axis ticks
+                    var xAxis = d3.axisBottom(xScale)
+                        .ticks(2)
+                        .tickFormat(d3.format(".0f")); // Specify the custom tick format without comma separator                    
                     var yAxis = d3.axisRight(yScale).ticks(5); // Specify the number of y-axis ticks
                     
                     var svg = tooltip.append("svg")
