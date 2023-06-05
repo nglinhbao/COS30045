@@ -2,7 +2,7 @@
 COS30045 - Data Visualization - Outward migration from Vietnam (2000-2020)
 
 # Website URL: 
-https://nglinhbao.github.io/COS30045/
+https://nglinhbao.github.io/Migration-in-Vietnam/
 
 # References:
 
